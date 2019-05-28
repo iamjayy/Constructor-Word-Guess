@@ -13,7 +13,8 @@ function word(answer) {
         for(var i = 0; i<this.objArray.length; i++){
             answerLog += this.objArray[i] + " ";
         }
-        
+        console.log(answerLog + "\n===============================\n")
+
     };
 
     this.userGuess = function(input){
