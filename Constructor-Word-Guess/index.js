@@ -63,10 +63,64 @@ function theLogic(){
                 ) {
                     console.log("\n Already Guessed or Nothing was entered \n")
                     theLogic();
+                }else {
+                    var wordCheckArray = [];
+
+                    computerWord.userGuess(input.userinput);
+
+                    computerWord.objArray.forEach(wordCheck);
+                    if(wordCheckArray.join("") === wordComplete.join("")){
+                        console.log("\nIncorrecr|n");
+
+                        incorrectLetters.push(input.userinput);
+                        guessesLeft--;
+                    }else{
+                        console.log("\nCorrect|n");
+
+                        correctLetters.push(input.userinput);
+                    }
+                    computerWord();
+
+                    console.log("Guesses left: " + guessesLeft + "\n");
+
+                    console.log("letters Guessed: " + incorrectLetters.join(" ") + "\n")
+
+                    if(guessesLeft > 0){
+                        theLogic();
+                    }else{
+                        console.log("you Have lost!\n");
+                    }
+                    function wordCheck(key){
+                        wordCheckArray.poush(key.guessed);
+                    }
                 }
             }
         });
     }else{
         console.log("You Win!\n");
     }
+    function wordCheck(key){
+        wordCheckArray.poush(key.guessed);
+    }
 }
+function restartGame(){
+    inquirer.prompt([
+        {
+            type: "list",
+            choices: "would you like to:",
+            choices: ["play Again", "exit"],
+            name: "restart"
+        }
+    ]).then(function(input){
+        if(input.restart === "play Again"){
+            requireNewWord = true;
+            incorrectLetters = [];
+            correctLetters = [];
+            guessesLeft = 10;
+            theLogic();
+        } else{
+            return;
+        }
+    });
+}
+theLogic();
